@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客详情</title>
+</head>
+<body>
+    <div style="margin-left:5%">
+        <a href="{%url 'blog'%}">首页</a>
+        用户名:<font>{{ username }}</font>
+        <a href="{%url 'login'%}">注销</a>
+    </div>
+    <hr>
+    <div>
+        <section style="margin-left:5%">
+            <header>
+                <h2><font size=50px>{{ post.title }}</font></h2>
+                    <p>
+                        发布时间: {{ post.date_time|date:'Y/m/d H:m:s'}}&nbsp&nbsp
+                        | 分类于 <a href="#">{{ post.category }}</a>&nbsp&nbsp
+                        | 作者:hcc &nbsp&nbsp
+                        | 评论数:{{comments_len}}
+                    </p>
+            </header>
+            <div>
+                <p style="margin-right:5%">
+                    {{ post.content|safe}}
+                </p>
+            </div>
+        </section>
+        <br><br>
+        <hr>
+        <article>
+            <h2 style="font-family: KaiTi;margin-left:5%;">评论列表</h2>
+            <hr>
+                {% for comm in comment_list %}
+                    <p style="width: 1000px;font-size: 20px;margin-left:5%;">{{comm.body}}</p>
+                    <p style="width: 1050px;margin-left:5%;"><font color="grey" size="4px">来自:&nbsp;{{comm.username}}</font>
+                    <font color="#6C6C6C" size="4px">&nbsp;&nbsp;&nbsp;&nbsp;{{comm.date_time}}</font></p>
+                    <hr>
+                {% endfor %}
+                {% if comment_list.object_list and comment_list.paginator.num_pages > 1 %}
+                    <div>
+                        {% if comment_list.has_previous %}
+                            <a href="?page={{ comment_list.previous_page_number }}" style="margin-left:5%"> 上一页</a>
+                        {% endif %}
+                        {% if comment_list.has_next %}
+                            <a  href="?page={{ comment_list.next_page_number }}" style="margin-left:5%">下一页 </a>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endif %}
+        <div style="margin-left:5%;margin-top:1%">
+            <form method="post" enctype="multipart/form-data" action="{%url 'postcomment'%}">
+                <input type="text" name="id" value="{{post.id}}" style="display:none">
+                <input type="submit" value="发布评论">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+

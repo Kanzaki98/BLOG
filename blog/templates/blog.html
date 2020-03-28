@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客主页</title>
+</head>
+<body>
+    <div style="margin-left:5%">
+        用户名:<font>{{ username }}</font>&nbsp;&nbsp;&nbsp;
+        <a href="{%url 'login'%}">注销</a>
+    </div>
+    <hr>
+    <div>
+        {% for post in post_list %}
+            <article>
+                <h3><font style="margin-left:5%">{{ post.title }}</font></h3>
+                <p>
+                    <font color="#ADADAD" style="margin-left:5%">
+                     发表于{{ post.date_time |date:'Y/m/d'}}&nbsp;&nbsp;
+                    | 分类于 <a  href="#">{{ post.category }}</a>&nbsp;&nbsp;
+                    </font>
+                </p>
+                <p style="margin-left:5%">
+                    {{ post.content|striptags|truncatechars_html:20 }}
+                </p>
+                <p><a style="margin-left:5%" href = "{%url 'detail' id=post.id%}">阅读全文</a></p>
+                <hr>
+        {% endfor %}
+        {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+            <div style="margin-left:5%">
+                {% if post_list.has_previous %}
+                    <a href="?page={{ post_list.previous_page_number }}">上一页</a>
+                {% endif %}
+                {% if post_list.has_next %}
+                    <a href="?page={{ post_list.next_page_number }}">下一页</a>
+                {% endif %}
+            </div>
+                </article>
+        {% endif %}
+    </div>
+
+</body>
+</html>

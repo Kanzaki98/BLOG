@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布评论页面</title>
+</head>
+<body>
+    <div style="margin-left:5%">
+        <a href="{%url 'blog'%}">首页</a>
+        用户名:<font>{{ username }}</font>
+        <a href="{%url 'login'%}">注销</a>
+    </div>
+    <hr>
+    <div style="margin-left:5%">
+        <h2>发布评论</h2>
+        <form method="post" action="{%url 'detail' id=id%}"  enctype="multipart/form-data">
+            <textarea name="body" placeholder="请输入评论内容" rows=10 cols=70></textarea>
+            <input type="text" name="id" value="{{id}}" style="display:none">
+            <input type="text" name="username" value="{{username}}" style="display:none"><br>
+            <input type="submit" value="提交"><br>
+        </form>
+        <br>
+        <form method="get" action="{%url 'detail' id=id%}">
+            <input type="submit" value="返回"><br>
+        </form>
+    </div>
+</body>
+</html>

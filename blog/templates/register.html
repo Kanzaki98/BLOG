@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        input{
+            font-size: inherit;
+        }
+        label{
+            cursor: pointer;
+            display: inline-block;
+            padding: 3px 6px;
+            text-align: right;
+            width: 150px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>注册页面</h1>
+        <form method="post" action="{%url 'register'%}"  enctype="multipart/form-data">
+            <label>用户名:</label><input type="text" name="username" placeholder="请输入用户名"><br>
+            <label>密码:</label><input type="password" name="password" placeholder="请输入密码"><br>
+            <label>确认密码:</label><input type="password" name="password1" placeholder="请确认密码"><br>
+            {{ error }}<br>
+            <input type="submit" value="注册"><br>
+        </form>
+        <br>
+        <form  method="post" action="{%url 'unlogin'%}">
+                <input type="submit" value="返回">
+        </form>
+    </center>
+</body>
+</html>
