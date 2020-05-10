@@ -1,3 +1,2 @@
-# Django 开发的支持评论的博客系统
-测试用户为hcc 密码为123456
-
+＃Django开发的支持评论的博客系统
+已部署到heroku云平台：https://guarded-beach-10954.herokuapp.com/
